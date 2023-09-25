@@ -50,9 +50,9 @@ function unreachable(why) {
 function startup() {
   const url = new URL(window.location.toLocaleString());
   let input = document.getElementById("expressionInput");
-  const val decodeURIComponent(url.searchParams.get("q"));
+  const val = url.searchParams.get("q");
   if (!val) return;
 
-  input.value = val;
+  input.value = decodeURIComponent(val);
   go();
 }
