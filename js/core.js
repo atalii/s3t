@@ -11,8 +11,16 @@
  */
 function go() {
   var input = document.getElementById("expressionInput").value;
+  if (!input) return;
+
   try {
     prettyPrintTruthTable(parse(input));
+
+    let permalink = document.getElementById("permalink");
+    let loc = new URL(window.location.toLocaleString());
+    loc.searchParams.set("q", encodeURIComponent(input));
+    permalink.href = loc.toString();
+    permalink.innerHTML = "permalink";
   } catch (e) {
     if (e.description !== undefined) {
       displayCompileError(input, e);
@@ -38,4 +46,11 @@ function assert(expr, what) {
  */
 function unreachable(why) {
   throw new Error("Unreachable code: " + why);
+}
+
+function startup() {
+  const url = new URL(window.location.toLocaleString());
+  let input = document.getElementById("expressionInput");
+  input.value = decodeURIComponent(url.searchParams.get("q"));
+  go();
 }
