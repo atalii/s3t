@@ -217,116 +217,12 @@ function isOperatorStart(input, index) {
  * index if one exists, and null otherwise.
  */
 function tryReadOperator(input, index) {
-  /* TODO: Clean this up a bit? This was fine when we had only a few symbols, but
-   * with the addition of the LaTeX operators this is getting a bit unwieldy.
-   */
+  // use a massive regex because god is dead and we have killed him
+  const pattern = /^(\\(([lL]eft)?[rR]ightarrow|wedge|lnot|land|top|bot|lor|vee|neg|to)|implies|true|false|<->|and|<=>|not|iff|->|\/\\|\\\/|->|&&|\|\||or|=>|[()~TF^!\u2227\u2228\u2192\u2194\u22A4\u22A5\u00AC])/;
 
-  /* Look in reverse order of length so that we use maximal-munch. */
-  /* Case 1: Fifteen-character operators. */
-  if (index < input.length - 14) {
-    var fifteenChars = input.substring(index, index + 15);
-    if (
-      fifteenChars === "\\leftrightarrow" ||
-      fifteenChars === "\\Leftrightarrow"
-    ) {
-      return fifteenChars;
-    }
-  }
-
-  /* Case 2: Eleven-character operators. */
-  if (index < input.length - 10) {
-    var elevenChars = input.substring(index, index + 11);
-    if (elevenChars === "\\rightarrow" || elevenChars === "\\Rightarrow") {
-      return elevenChars;
-    }
-  }
-
-  /* Case 3: Seven-character operators like "implies" */
-  if (index < input.length - 6) {
-    var sevenChars = input.substring(index, index + 7);
-    if (sevenChars === "implies") {
-      return sevenChars;
-    }
-  }
-
-  /* Case 4: Six-character operators */
-  if (index < input.length - 5) {
-    var sixChars = input.substring(index, index + 6);
-    if (sixChars === "\\wedge") {
-      return sixChars;
-    }
-  }
-
-  /* Case 5: Five-character operators like "false" */
-  if (index < input.length - 4) {
-    var fiveChars = input.substring(index, index + 5);
-    if (
-      fiveChars === "false" ||
-      fiveChars === "\\lnot" ||
-      fiveChars === "\\lneg" ||
-      fiveChars === "\\land"
-    ) {
-      return fiveChars;
-    }
-  }
-
-  /* Case 6: Four-character operators like "true" */
-  if (index < input.length - 3) {
-    var fourChars = input.substring(index, index + 4);
-    if (
-      fourChars === "true" ||
-      fourChars === "\\top" ||
-      fourChars === "\\bot" ||
-      fourChars === "\\lor" ||
-      fourChars === "\\vee" ||
-      fourChars === "\\neg"
-    ) {
-      return fourChars;
-    }
-  }
-
-  /* Case 7: Three-char operators like <-> */
-  if (index < input.length - 2) {
-    var threeChars = input.substring(index, index + 3);
-    if (
-      threeChars === "<->" ||
-      threeChars === "and" ||
-      threeChars === "<=>" ||
-      threeChars === "not" ||
-      threeChars === "iff" ||
-      threeChars === "\\to"
-    ) {
-      return threeChars;
-    }
-  }
-
-  /* Case 8: Two-char operator like ->, /\, \/ */
-  if (index < input.length - 1) {
-    var twoChars = input.substring(index, index + 2);
-    if (
-      twoChars === "/\\" ||
-      twoChars === "\\/" ||
-      twoChars === "->" ||
-      twoChars === "&&" ||
-      twoChars === "||" ||
-      twoChars === "or" ||
-      twoChars === "=>"
-    ) {
-      return twoChars;
-    }
-  }
-
-  /* Case 9: Single-char operator like (, ), ~, T, F. */
-  if (
-    /[()~TF^!\u2227\u2228\u2192\u2194\u22A4\u22A5\u00AC]/.test(
-      input.charAt(index),
-    )
-  ) {
-    return input.charAt(index);
-  }
-
-  /* If we got here, nothing matched. */
-  return null;
+  const sliced = input.slice(index);
+  const match = pattern.exec(sliced);
+  return match ? match[0] : null;
 }
 
 /* Function: translate
