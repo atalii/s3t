@@ -49,6 +49,7 @@ function parse(input) {
   for (var i in tokens) {
     var currToken = tokens[i];
 
+    console.log(currToken);
     if (needOperand) {
       /* If it's an operand, push it on the operand stack. */
       if (isOperand(currToken)) {
@@ -287,6 +288,7 @@ function isBinaryOperator(token) {
     token.type === "<->" ||
     token.type === "->" ||
     token.type === "/\\" ||
+    token.type === "xor" ||
     token.type === "\\/"
   );
 }
@@ -302,7 +304,8 @@ function priorityOf(token) {
   if (token.type === "<->") return 0;
   if (token.type === "->") return 1;
   if (token.type === "\\/") return 2;
-  if (token.type === "/\\") return 3;
+  if (token.type === "xor") return 3;
+  if (token.type === "/\\") return 4;
   unreachable("Should never need the priority of " + token.type);
 }
 
@@ -316,6 +319,7 @@ function createOperatorNode(lhs, token, rhs) {
   if (token.type === "->") return new impliesNode(lhs, rhs);
   if (token.type === "\\/") return new orNode(lhs, rhs);
   if (token.type === "/\\") return new andNode(lhs, rhs);
+  if (token.type === "xor") return new xorNode(lhs, rhs);
   unreachable(
     "Should never need to create an operator node from " + token.type,
   );

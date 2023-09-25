@@ -8,4 +8,5 @@ access it at: [https://s3t.tali.network](https://s3t.tali.network/)
 
 ## what's different
 
-* color coding
+* support for xor
+* color coding true/false

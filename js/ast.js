@@ -67,6 +67,19 @@ andNode.prototype.toString = function (variables) {
   );
 };
 
+function xorNode(lhs, rhs) {
+  this.lhs = lhs;
+  this.rhs = rhs;
+}
+
+xorNode.prototype.evaluate = function (assignment) {
+  return this.lhs.evaluate(assignment) != this.rhs.evaluate(assignment);
+};
+
+xorNode.prototype.toString = function (variables) {
+  return `(${this.lhs.toString(variables)} &oplus; ${this.rhs.toString(variables)})`;
+};
+
 /*** Node type for \/ ***/
 function orNode(lhs, rhs) {
   this.lhs = lhs;

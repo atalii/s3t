@@ -178,6 +178,7 @@ function isReservedWord(token) {
     token === "and" ||
     token === "or" ||
     token === "not" ||
+    token === "xor" ||
     token === "iff" ||
     token === "implies" ||
     token === "true" ||
@@ -218,7 +219,7 @@ function isOperatorStart(input, index) {
  */
 function tryReadOperator(input, index) {
   // use a massive regex because god is dead and we have killed him
-  const pattern = /^(\\(([lL]eft)?[rR]ightarrow|wedge|lnot|land|top|bot|lor|vee|neg|to)|implies|true|false|<->|and|<=>|not|iff|->|\/\\|\\\/|->|&&|\|\||or|=>|[()~TF^!\u2227\u2228\u2192\u2194\u22A4\u22A5\u00AC])/;
+  const pattern = /^(\\(([lL]eft)?[rR]ightarrow|wedge|lnot|land|top|bot|lor|vee|neg|to)|implies|true|false|<->|and|xor|<=>|not|iff|->|\/\\|\\\/|->|&&|\|\||or|=>|[()~TF^!\u2227\u2228\u2192\u2194\u22A4\u22A5\u00AC])/;
 
   const sliced = input.slice(index);
   const match = pattern.exec(sliced);
@@ -273,6 +274,7 @@ function translate(input) {
     input === "\\neg"
   )
     return "~";
+
   if (input === "\u22A4" || input === "true" || input === "\\top") return "T";
   if (input === "\u22A5" || input === "false" || input === "\\bot") return "F";
   return input;
