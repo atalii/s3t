@@ -24,7 +24,6 @@ table.truthTable th {
 
 table.truthTable td,
 table.truthTable th {
-	border-right: 1px solid rgb(210, 210, 221);
 	padding: 5px 10px 5px 10px;
 }
 table.truthTable td {
@@ -32,13 +31,6 @@ table.truthTable td {
 }
 table.truthTable td:last-child {
 	font-weight: 600;
-}
-table.truthTable tr,
-table.truthTable th {
-	border-bottom: 1px solid rgb(171, 170, 187);
-}
-table.truthTable tr:last-child {
-	border-bottom: 0px;
 }
 
 div.truth-table-holder {
@@ -105,4 +97,12 @@ tt {
 
 table.connectives-help td {
 	width: 75px;
+}
+
+.val-T {
+	background-color: #8ff0a4;
+}
+
+.val-F {
+	background-color: #f2aca5;
 }

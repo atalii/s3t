@@ -69,13 +69,17 @@ function outputRow(table) {
 		/* Show the value of each variable. */
 		for (var i = 0; i < assignment.length; i++) {
 			var cell = document.createElement("td");
-			cell.innerHTML = (assignment[i]? "T" : "F");
+			const val = assignment[i] ? "T" : "F";
+			cell.innerHTML = val;
+			cell.classList.add(`val-${val}`);
 			row.appendChild(cell);
 		}
 		
 		/* Show the value of the expression. */
 		var lastCell = document.createElement("td");
+		const val = assignment[i] ? "T" : "F";
 		lastCell.innerHTML = (result? "T" : "F");
+		lastCell.classList.add(`val-${val}`);
 		row.appendChild(lastCell);
 		
 		table.appendChild(row);
