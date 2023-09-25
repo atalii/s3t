@@ -49,7 +49,6 @@ function parse(input) {
   for (var i in tokens) {
     var currToken = tokens[i];
 
-    console.log(currToken);
     if (needOperand) {
       /* If it's an operand, push it on the operand stack. */
       if (isOperand(currToken)) {
