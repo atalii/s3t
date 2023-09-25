@@ -77,8 +77,8 @@ function outputRow(table) {
 		
 		/* Show the value of the expression. */
 		var lastCell = document.createElement("td");
-		const val = assignment[i] ? "T" : "F";
-		lastCell.innerHTML = (result? "T" : "F");
+		const val = result ? "T" : "F";
+		lastCell.innerHTML = val;
 		lastCell.classList.add(`val-${val}`);
 		row.appendChild(lastCell);
 		
