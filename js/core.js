@@ -11,7 +11,6 @@
  */
 function go() {
   var input = document.getElementById("expressionInput").value;
-  if (!input) return;
 
   try {
     prettyPrintTruthTable(parse(input));
@@ -51,6 +50,9 @@ function unreachable(why) {
 function startup() {
   const url = new URL(window.location.toLocaleString());
   let input = document.getElementById("expressionInput");
-  input.value = decodeURIComponent(url.searchParams.get("q"));
+  const val decodeURIComponent(url.searchParams.get("q"));
+  if (!val) return;
+
+  input.value = val;
   go();
 }
