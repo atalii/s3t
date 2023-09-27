@@ -19,7 +19,7 @@ function go() {
     let loc = new URL(window.location.toLocaleString());
     loc.searchParams.set("q", encodeURIComponent(input));
     permalink.href = loc.toString();
-    permalink.innerHTML = "permalink";
+    permalink.innerHTML = "permalink to this table";
   } catch (e) {
     if (e.description !== undefined) {
       displayCompileError(input, e);

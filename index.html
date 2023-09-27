@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Truth Table Generator</title>
+		<title>Stolen Truth Table Tool</title>
 		<script type="text/javascript" src="js/ast.js"></script>
 		<script type="text/javascript" src="js/core.js"></script>
 		<script type="text/javascript" src="js/parser.js"></script>
@@ -11,25 +11,32 @@
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
 	</head>
 	<body onload="startup()">
-		<div class="content">
+		<main>
 			<h1 class="title">
-				Truth Table Generator
+				S3T
 			</h1>
-			<p class="overview">
+			<details class="overview">
+				<summary>Expression entry help</summary>
 				This tool generates truth tables for propositional logic formulas.
 				You can enter logical operators in several different formats. For example, the
 				propositional formula <nobr>p &and; q &rarr; &not;r</nobr> could be written as
 				<nobr><tt>p /\ q -&gt; ~r</tt></nobr>,
 				as <nobr><tt>p and q =&gt; not r</tt></nobr>, or as <nobr><tt>p &amp;&amp; q -&gt; !r</tt></nobr>.
 				The connectives &#8868; and &#8869; can be entered as <tt>T</tt> and <tt>F</tt>.
-			</p>
+			</details>
 			<p>
 				<input id="expressionInput" type="text" oninput="go();" placeholder="Enter a formula"/>
 			</p>
 			<div id="table-target">
 				<!-- Generated truth tables go here -->
-				<a id="permalink"/>
 			</div>
-		</div>
+			<div class="permalink">
+				<a id="permalink"></a>
+			</div>
+			<div id="footer">
+				<a href="https://github.com/atalii/s3t">source code</a>
+				<a href="https://web.stanford.edu/class/cs103/tools/truth-table-tool/">derived from the original</a>
+			</div>
+		</main>
 	</body>
 </html>
