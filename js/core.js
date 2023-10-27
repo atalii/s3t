@@ -17,9 +17,11 @@ function go() {
 
     let permalink = document.getElementById("permalink");
     let loc = new URL(window.location.toLocaleString());
+
     loc.searchParams.set("q", encodeURIComponent(input));
     permalink.href = loc.toString();
     permalink.innerHTML = "permalink to this table";
+    window.history.replaceState({}, "", permalink.href);
   } catch (e) {
     if (e.description !== undefined) {
       displayCompileError(input, e);
